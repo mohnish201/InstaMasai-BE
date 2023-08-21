@@ -6,6 +6,7 @@ const PostSchema = mongoose.Schema(
     body: String,
     device: String,
     no_of_comments: Number,
+    userId: String
   },
   {
     versionKey: false,

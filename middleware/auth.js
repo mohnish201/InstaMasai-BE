@@ -6,11 +6,10 @@ const auth = async (req, res, next) => {
 
   const Blist = await BlistModel.findOne({ token });
   try {
-    if (!Blist && token) {
+    if (!Blist) {
       jwt.verify(token, "masai", (err, decoded) => {
         if (decoded) {
           req.body.userId = decoded.userId;
-          req.body.username = decoded.username;
           next();
         } else {
           res.json("You are not Authorized");

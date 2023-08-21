@@ -32,14 +32,14 @@ UserRoute.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await UserModel.findOne({ email });
-
     if (user) {
       bcrypt.compare(password, user.password, async (err, result) => {
         if (result) {
           const token = jwt.sign(
-            { userId: user._id, username: user.username },
+            { userId: user._id},
             "masai",
             { expiresIn: "7d" }
+        
           );
           res.json({ msg: "Login Successfull", token });
           setTimeout(async () => {
